@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Instagram, Linkedin, Youtube, ArrowRight, Menu, X } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Instagram, Linkedin, Youtube, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate();
 
   // Handle scroll effect
   useEffect(() => {
@@ -19,15 +18,6 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleClientAreaClick = () => {
-    const isAuthenticated = localStorage.getItem('clientAuthenticated') === 'true';
-    if (!isAuthenticated) {
-      navigate('/cliente');
-    } else {
-      navigate('/cliente/dashboard');
-    }
   };
 
   return (
@@ -77,7 +67,7 @@ const Navbar = () => {
             ))}
           </nav>
 
-          {/* Right Side - Social + Client Area */}
+          {/* Right Side - Social Media */}
           <div className="flex items-center space-x-4">
             {/* Social Media Icons */}
             <div className="hidden md:flex items-center space-x-3">
@@ -96,15 +86,6 @@ const Navbar = () => {
                 </a>
               ))}
             </div>
-
-            {/* Client Area Button */}
-            <button 
-              onClick={handleClientAreaClick}
-              className="hidden md:inline-flex items-center bg-gradient-to-r from-primary to-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 group"
-            >
-              <span>Área do cliente</span>
-              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
 
             {/* Mobile Menu Button */}
             <button 
@@ -170,20 +151,6 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-
-            {/* Mobile Client Area Button */}
-            <div className="pt-4">
-              <button 
-                onClick={() => {
-                  toggleMobileMenu();
-                  handleClientAreaClick();
-                }}
-                className="w-full flex items-center justify-center bg-gradient-to-r from-primary to-primary-dark text-white px-6 py-3 rounded-xl text-sm font-medium hover:shadow-lg transition-all duration-300 group"
-              >
-                <span>Área do cliente</span>
-                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-            </div>
           </nav>
 
           {/* Mobile Social Links */}
