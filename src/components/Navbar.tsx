@@ -27,22 +27,22 @@ const Navbar = () => {
         : 'bg-white/80 backdrop-blur-sm border-b border-green-100'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center group">
-            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 p-2 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 p-3 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
               <img 
                 src="/logo.png" 
                 alt="AWDZ - Administração Judicial" 
-                className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
               />
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
             </div>
-            <div className="ml-3 hidden sm:block">
-              <div className="text-lg font-bold text-primary group-hover:text-primary-dark transition-colors duration-300">
+            <div className="ml-4 hidden sm:block">
+              <div className="text-xl font-bold text-primary group-hover:text-primary-dark transition-colors duration-300">
                 AWDZ
               </div>
-              <div className="text-xs text-gray-500 -mt-1">
+              <div className="text-sm text-gray-500 -mt-1">
                 Administração Judicial
               </div>
             </div>
@@ -113,22 +113,22 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden fixed top-20 right-0 h-[calc(100vh-5rem)] w-full max-w-sm bg-white/95 backdrop-blur-lg shadow-2xl transform transition-all duration-300 ease-out ${
+      <div className={`lg:hidden fixed top-24 right-0 h-[calc(100vh-6rem)] w-full max-w-sm bg-white/95 backdrop-blur-lg shadow-2xl transform transition-all duration-300 ease-out ${
         isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}>
         <div className="p-6 h-full flex flex-col">
           {/* Mobile Logo */}
           <div className="flex items-center justify-center mb-8 pb-6 border-b border-gray-100">
             <Link to="/" className="flex items-center group" onClick={toggleMobileMenu}>
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 p-3">
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 p-4">
                 <img 
                   src="/logo.png" 
                   alt="AWDZ Logo" 
-                  className="h-16 w-auto object-contain" 
+                  className="h-20 w-auto object-contain" 
                 />
               </div>
-              <div className="ml-3">
-                <div className="text-xl font-bold text-primary">AWDZ</div>
+              <div className="ml-4">
+                <div className="text-2xl font-bold text-primary">AWDZ</div>
                 <div className="text-sm text-gray-500">Administração Judicial</div>
               </div>
             </Link>
