@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle, User, MessageSquare } from 'lucide-react';
 import Footer from '../components/Footer';
 
-const ContactInfo = ({ icon: Icon, title, content, color }: { 
-  icon: any, 
-  title: string, 
+const ContactInfo = ({ icon: Icon, title, content, color }: {
+  icon: any,
+  title: string,
   content: string | React.ReactNode,
-  color: string 
+  color: string
 }) => (
   <div className="group flex items-start space-x-4 p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
     <div className={`text-white ${color} p-4 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
@@ -40,13 +40,13 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
@@ -64,26 +64,26 @@ const Contact: React.FC = () => {
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
           </div>
-          
+
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center mb-16">
               <div className="inline-flex items-center justify-center mb-8 py-3 px-6 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-primary/10">
                 <MessageSquare size={20} className="text-primary mr-2" />
                 <span className="text-primary font-medium">Fale Conosco</span>
               </div>
-              
+
               <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="block text-gray-800">Entre em</span>
                 <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Contato</span>
               </h1>
-              
+
               <p className="text-xl text-gray-700 leading-relaxed mb-8">
-                Estamos aqui para ajudar. Entre em contato conosco e descubra como podemos 
+                Estamos aqui para ajudar. Entre em contato conosco e descubra como podemos
                 transformar sua gestão jurídica.
               </p>
 
               {/* Quick Contact Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {[
                   { value: '< 24h', label: 'Tempo de Resposta', icon: Clock },
                   { value: '15+', label: 'Anos de Experiência', icon: CheckCircle },
@@ -97,7 +97,7 @@ const Contact: React.FC = () => {
                     <div className="text-sm text-gray-600">{stat.label}</div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -140,7 +140,7 @@ const Contact: React.FC = () => {
                             <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                           </div>
                         </div>
-                        
+
                         <div>
                           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                             E-mail
@@ -160,7 +160,7 @@ const Contact: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div>
                         <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                           Assunto
@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
                           required
                         />
                       </div>
-                      
+
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                           Mensagem
@@ -192,7 +192,7 @@ const Contact: React.FC = () => {
                           required
                         ></textarea>
                       </div>
-                      
+
                       <button
                         type="submit"
                         disabled={isSubmitting}
@@ -227,7 +227,7 @@ const Contact: React.FC = () => {
                   }
                   color="bg-gradient-to-br from-blue-500 to-blue-600"
                 />
-                
+
                 <ContactInfo
                   icon={Phone}
                   title="Telefone"
@@ -238,7 +238,7 @@ const Contact: React.FC = () => {
                   }
                   color="bg-gradient-to-br from-green-500 to-green-600"
                 />
-                
+
                 <ContactInfo
                   icon={MapPin}
                   title="Endereço"
@@ -252,7 +252,7 @@ const Contact: React.FC = () => {
                   }
                   color="bg-gradient-to-br from-purple-500 to-purple-600"
                 />
-                
+
                 <ContactInfo
                   icon={Clock}
                   title="Horário de Funcionamento"
@@ -270,10 +270,10 @@ const Contact: React.FC = () => {
                 <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-8 rounded-2xl border border-primary/10">
                   <h3 className="font-semibold text-gray-800 text-lg mb-4">Precisa de Atendimento Urgente?</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Para casos urgentes, entre em contato diretamente pelo telefone. 
+                    Para casos urgentes, entre em contato diretamente pelo telefone.
                     Nossa equipe está preparada para atender suas necessidades.
                   </p>
-                  <a 
+                  <a
                     href="tel:+556192698930"
                     className="inline-flex items-center text-primary hover:text-primary-dark font-medium transition-colors duration-300"
                   >

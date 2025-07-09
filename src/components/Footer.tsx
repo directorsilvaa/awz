@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               AWDZ
             </Link>
             <p className="text-gray-600 mb-4">
-              Simplificando a administração jurídica com tecnologia de ponta desde 2025.
+              Simplificando a administração judicial com tecnologia de ponta desde 2025.
             </p>
             <div className="flex space-x-4">
               <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-primary transition-colors">
@@ -38,23 +38,23 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Produto</h3>
+            {/* <h3 className="text-lg font-semibold mb-4">Produto</h3>
             <ul className="space-y-2">
               <li><Link to="/recursos" className="text-gray-600 hover:text-primary transition-colors">Recursos</Link></li>
               <li><Link to="/precos" className="text-gray-600 hover:text-primary transition-colors">Preços</Link></li>
               <li><Link to="/seguranca" className="text-gray-600 hover:text-primary transition-colors">Segurança</Link></li>
               <li><Link to="/integracoes" className="text-gray-600 hover:text-primary transition-colors">Integrações</Link></li>
-            </ul>
+            </ul> */}
           </div>
           
           <div className="col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Suporte</h3>
+            {/* <h3 className="text-lg font-semibold mb-4">Suporte</h3>
             <ul className="space-y-2">
               <li><Link to="/ajuda" className="text-gray-600 hover:text-primary transition-colors">Central de Ajuda</Link></li>
               <li><Link to="/contato" className="text-gray-600 hover:text-primary transition-colors">Contato</Link></li>
               <li><Link to="/docs" className="text-gray-600 hover:text-primary transition-colors">Documentação</Link></li>
               <li><Link to="/status" className="text-gray-600 hover:text-primary transition-colors">Status</Link></li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         

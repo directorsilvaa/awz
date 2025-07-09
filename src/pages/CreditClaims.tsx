@@ -35,13 +35,13 @@ const CreditClaims: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
@@ -70,7 +70,7 @@ const CreditClaims: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         {/* Navigation Breadcrumb */}
         <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200">
-          <div className="container mx-auto px-4 py-3">
+          {/* <div className="container mx-auto px-4 py-3">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
               <span>quem somos</span>
               <span>/</span>
@@ -82,28 +82,28 @@ const CreditClaims: React.FC = () => {
               <span>/</span>
               <span>cadastramento para assembleia</span>
             </nav>
-          </div>
+          </div> */}
         </div>
 
         <section className="pt-20 pb-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
           </div>
-          
+
           <div className="container mx-auto px-4 relative">
-            <div className="max-w-4xl mx-auto text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight text-white">
+            <div className="max-w-4xl mx-auto text-center mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-0 leading-tight text-black">
                 Habilitações e divergências de crédito
               </h1>
             </div>
 
-            <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-lg p-8 md:p-12">
+            <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-lg p-8 md:p-6">
               {/* Document Submission Section */}
               <div className="mb-12">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">Envio de documentos</h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Nosso objetivo é contribuir para um processo judicial rápido e eficaz. Este formulário tem por finalidade a recepção 
-                  de documentos pela administração judicial e visa facilitar o envio pela parte interessada. Os documentos originais 
+                  Nosso objetivo é contribuir para um processo judicial rápido e eficaz. Este formulário tem por finalidade a recepção
+                  de documentos pela administração judicial e visa facilitar o envio pela parte interessada. Os documentos originais
                   deverão ser encaminhados a um dos nossos escritórios para conferência e contagem do prazo legal.
                 </p>
 

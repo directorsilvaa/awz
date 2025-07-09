@@ -62,7 +62,7 @@ const AssemblyRegistration: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
         {/* Navigation Breadcrumb */}
         <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200">
-          <div className="container mx-auto px-4 py-3">
+          {/* <div className="container mx-auto px-4 py-3">
             <nav className="flex items-center space-x-2 text-sm text-gray-600">
               <span>quem somos</span>
               <span>/</span>
@@ -74,7 +74,7 @@ const AssemblyRegistration: React.FC = () => {
               <span>/</span>
               <span className="text-primary font-medium">cadastramento para assembleia</span>
             </nav>
-          </div>
+          </div> */}
         </div>
 
         <section className="pt-20 pb-20 relative overflow-hidden">
@@ -84,7 +84,7 @@ const AssemblyRegistration: React.FC = () => {
           
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight text-white">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2 leading-tight text-black">
                 Cadastramento para Assembleia
               </h1>
             </div>
