@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
 
             {/* Visual Element */}
             <div className="relative">
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="relative bg-white rounded-3xl shadow-2xl p-8">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl"></div>
                 <div className="relative space-y-6">
                   <div className="flex items-center space-x-4">

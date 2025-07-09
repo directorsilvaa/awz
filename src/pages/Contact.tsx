@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 {[
                   { value: '< 24h', label: 'Tempo de Resposta', icon: Clock },
-                  {  label: 'Reconhecida pela Eficiência e Seriedade', icon: CheckCircle },
+                  { value: '15+', label: 'Anos de Experiência', icon: CheckCircle },
                   { value: '24/7', label: 'Suporte Disponível', icon: Phone }
                 ].map((stat, index) => (
                   <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary/10">

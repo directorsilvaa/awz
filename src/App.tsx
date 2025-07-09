@@ -19,6 +19,8 @@ import AdminProcessConsultation from './pages/AdminProcessConsultation';
 import AdminQualifications from './pages/AdminQualifications';
 import AdminUserOperations from './pages/AdminUserOperations';
 import ProtectedRoute from './components/ProtectedRoute';
+import CreditClaims from './pages/CreditClaims';
+import AssemblyRegistration from './pages/AssemblyRegistration';
 
 const AppContent = () => {
   const location = useLocation();
@@ -37,6 +39,8 @@ const AppContent = () => {
         <Route path="/privacidade" element={<Privacy />} />
         <Route path="/cliente" element={<ClientArea />} />
         <Route path="/cliente/habilitacoes" element={<ClientQualifications />} />
+        <Route path="/habilitacoes-credito" element={<CreditClaims />} />
+        <Route path="/cadastramento-assembleia" element={<AssemblyRegistration />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={
           <ProtectedRoute>
