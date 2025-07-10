@@ -19,7 +19,7 @@ const AssemblyTimer: React.FC<{ userId: string }> = ({ userId }) => {
   useEffect(() => {
     const assemblies = JSON.parse(localStorage.getItem('userAssemblies') || '{}');
     const assemblyDateTime = assemblies[userId];
-    
+
     if (!assemblyDateTime) return;
 
     // Set the formatted date
@@ -80,53 +80,13 @@ const AssemblyTimer: React.FC<{ userId: string }> = ({ userId }) => {
 
 const ClientDashboard: React.FC = () => {
   const navigate = useNavigate();
-  
-  const processes: Process[] = [
-    {
-      id: '1',
-      number: '0001234-12.2024.8.26.0100',
-      title: 'Processo Civil - Indenização',
-      status: 'Em andamento',
-      lastUpdate: '10/03/2024',
-      court: 'TJSP'
-    },
-    {
-      id: '2',
-      number: '0004567-34.2024.8.26.0100',
-      title: 'Processo Trabalhista',
-      status: 'Concluído',
-      lastUpdate: '08/03/2024',
-      court: 'TRT-2'
-    },
-    {
-      id: '3',
-      number: '0007890-56.2024.8.26.0100',
-      title: 'Recurso Administrativo',
-      status: 'Pendente',
-      lastUpdate: '05/03/2024',
-      court: 'TJSP'
-    }
-  ];
 
   const handleLogout = () => {
     localStorage.removeItem('clientAuthenticated');
     localStorage.removeItem('clientName');
     localStorage.removeItem('clientEmail');
     localStorage.removeItem('clientId');
-    navigate('/cliente', { replace: true });
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Em andamento':
-        return 'bg-blue-100 text-blue-800';
-      case 'Concluído':
-        return 'bg-secondary/20 text-primary';
-      case 'Pendente':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
+    navigate('/', { replace: true });
   };
 
   const clientName = localStorage.getItem('clientName') || 'Cliente';
@@ -136,23 +96,16 @@ const ClientDashboard: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header Stats */}
       <div className="bg-primary pt-12 pb-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTJzMCAyLTIgNHMtMi0yLTQtMiAyIDIgMiA0LTIgMi00IDJzMC0yIDAtNCAyIDIgNCAyIDAtMiAyLTQgMiAyIDQgMi0yIDItMiA0IDIgMiA0IDIgMC0yIDAtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
-        
+        {/* <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTJzMCAyLTIgNHMtMi0yLTQtMiAyIDIgMiA0LTIgMi00IDJzMC0yIDAtNCAyIDIgNCAyIDAtMiAyLTQgMiAyIDQgMi0yIDItMiA0IDIgMiA0IDIgMC0yIDAtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div> */}
+
         <div className="container mx-auto px-4">
           {/* User Info */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex space-x-4">
-              <Link
-                to="/cliente/habilitacoes"
-                className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors flex items-center"
-              >
-                <Award size={20} className="mr-2" />
-                Habilitações
-              </Link>
             </div>
             <button
               onClick={handleLogout}
-              className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors"
+              className="cursor-pointer bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors"
             >
               Sair
             </button>
@@ -184,59 +137,8 @@ const ClientDashboard: React.FC = () => {
         {/* Assembly Timer */}
         <AssemblyTimer userId={clientId} />
 
-        {/* Process List */}
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-800">Seus Processos</h2>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Número do Processo</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Título</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Tribunal</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Última Atualização</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Status</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">Ações</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {processes.map((process) => (
-                  <tr key={process.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-primary">{process.number}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900">{process.title}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        {process.court}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">{process.lastUpdate}</td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(process.status)}`}>
-                        {process.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex justify-end">
-                        <button className="text-primary hover:text-primary-dark">
-                          <Eye size={20} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-24">
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
               <Award className="mr-2 text-primary" size={20} />
@@ -278,7 +180,7 @@ const ClientDashboard: React.FC = () => {
 };
 
 const ClientArea: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => 
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
     localStorage.getItem('clientAuthenticated') === 'true'
   );
   const [showPassword, setShowPassword] = useState(false);

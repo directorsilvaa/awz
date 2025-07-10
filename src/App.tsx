@@ -45,7 +45,7 @@ const AppContent = () => {
         <Route path="/admin" element={
           <ProtectedRoute>
             <AdminLayout>
-              <AdminDashboard />
+              <AdminAssembly />
             </AdminLayout>
           </ProtectedRoute>
         } />
@@ -63,13 +63,13 @@ const AppContent = () => {
             </AdminLayout>
           </ProtectedRoute>
         } />
-        <Route path="/admin/relatorios" element={
+        {/* <Route path="/admin/relatorios" element={
           <ProtectedRoute>
             <AdminLayout>
               <AdminReports />
             </AdminLayout>
           </ProtectedRoute>
-        } />
+        } /> */}
         <Route path="/admin/consulta" element={
           <ProtectedRoute>
             <AdminLayout>
@@ -99,7 +99,7 @@ const AppContent = () => {
 export default function App() {
   React.useEffect(() => {
     document.title = 'AWDZ | O Futuro da Administração Jurídica';
-    
+
     const link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
     if (link) {
       link.href = '/favicon.ico';

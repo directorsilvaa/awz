@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  Upload, FileText, Plus, Trash2, Eye, Download, 
-  CheckCircle, XCircle, Clock, AlertTriangle, Send
+import {
+  Upload, FileText, Plus, Trash2, Eye, Download,
+  CheckCircle, XCircle, Clock, AlertTriangle, Send,
+  ArrowLeft
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Document {
   id: string;
@@ -29,7 +31,7 @@ const ClientQualifications: React.FC = () => {
   const [showNewModal, setShowNewModal] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<QualificationRequest | null>(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
-  
+
   // Form states
   const [processNumber, setProcessNumber] = useState('');
   const [creditAmount, setCreditAmount] = useState('');
@@ -108,16 +110,16 @@ const ClientQualifications: React.FC = () => {
   };
 
   const handleFileUpload = (docId: string, file: File) => {
-    setDocuments(documents.map(doc => 
-      doc.id === docId 
+    setDocuments(documents.map(doc =>
+      doc.id === docId
         ? { ...doc, name: file.name, file }
         : doc
     ));
   };
 
   const handleDocumentTypeChange = (docId: string, type: string) => {
-    setDocuments(documents.map(doc => 
-      doc.id === docId 
+    setDocuments(documents.map(doc =>
+      doc.id === docId
         ? { ...doc, type }
         : doc
     ));
@@ -134,9 +136,9 @@ const ClientQualifications: React.FC = () => {
         documents,
         notes
       };
-      
+
       console.log('Submitting qualification request:', newRequest);
-      
+
       // Reset form
       setProcessNumber('');
       setCreditAmount('');
@@ -202,13 +204,19 @@ const ClientQualifications: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-primary pt-12 pb-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTJzMCAyLTIgNHMtMi0yLTQtMiAyIDIgMiA0LTIgMi00IDJzMC0yIDAtNCAyIDIgNCAyIDAtMiAyLTQgMiAyIDQgMi0yIDItMiA0IDIgMiA0IDIgMC0yIDAtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
-        
+        {/* <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTJzMCAyLTIgNHMtMi0yLTQtMiAyIDIgMiA0LTIgMi00IDJzMC0yIDAtNCAyIDIgNCAyIDAtMiAyLTQgMiAyIDQgMi0yIDItMiA0IDIgMiA0IDIgMC0yIDAtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div> */}
+
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-white">Habilitações de Crédito</h1>
-              <p className="text-white/80">Gerencie suas solicitações de habilitação</p>
+            <div className="flex items-center">
+              <Link to="/cliente" className="flex items-center text-[16px] font-bold text-gray-400 hover:text-gray-300 transition-colors">
+                <ArrowLeft size={20} className="mr-2" /> {/* Ícone de voltar */}
+                Voltar
+              </Link>
+              <div className='mt-4 ml-6'> {/* Adicionado margem à esquerda */}
+                <h1 className="text-3xl font-bold text-white">Habilitações de Crédito</h1>
+                <p className="text-white/80">Gerencie suas solicitações de habilitação</p>
+              </div>
             </div>
             <button
               onClick={() => setShowNewModal(true)}
@@ -218,6 +226,7 @@ const ClientQualifications: React.FC = () => {
               Nova Habilitação
             </button>
           </div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -302,7 +311,7 @@ const ClientQualifications: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-[800px] max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold text-gray-800 mb-6">Nova Habilitação de Crédito</h3>
-            
+
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -357,7 +366,7 @@ const ClientQualifications: React.FC = () => {
                     Adicionar Documento
                   </button>
                 </div>
-                
+
                 <div className="space-y-3">
                   {documents.map((doc) => (
                     <div key={doc.id} className="border border-gray-200 rounded-lg p-4">

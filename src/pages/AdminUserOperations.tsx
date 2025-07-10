@@ -163,7 +163,7 @@ const AdminUserOperations: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        {/* <div className="bg-white rounded-xl shadow-sm p-6">
           <div className="flex items-center">
             <div className="bg-green-500 p-3 rounded-lg text-white mr-4">
               <Shield size={24} />
@@ -175,8 +175,8 @@ const AdminUserOperations: React.FC = () => {
               </p>
             </div>
           </div>
-        </div>
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        </div> */}
+        {/* <div className="bg-white rounded-xl shadow-sm p-6">
           <div className="flex items-center">
             <div className="bg-purple-500 p-3 rounded-lg text-white mr-4">
               <Settings size={24} />
@@ -188,7 +188,7 @@ const AdminUserOperations: React.FC = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Search */}

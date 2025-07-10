@@ -15,9 +15,9 @@ const AdminDashboard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         {[
           { label: 'Total de Processos', value: processes.length.toString(), icon: FileText, color: 'bg-blue-500' },
-          { label: 'Usuários Ativos', value: '856', icon: Users, color: 'bg-green-500' },
-          { label: 'PDFs Gerados', value: '2,567', icon: Files, color: 'bg-purple-500' },
-          { label: 'Relatórios', value: '189', icon: PieChart, color: 'bg-yellow-500' }
+          // { label: 'Usuários Ativos', value: '856', icon: Users, color: 'bg-green-500' },
+          // { label: 'PDFs Gerados', value: '2,567', icon: Files, color: 'bg-purple-500' },
+          // { label: 'Relatórios', value: '189', icon: PieChart, color: 'bg-yellow-500' }
         ].map((stat, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center">
