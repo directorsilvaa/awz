@@ -19,8 +19,7 @@ const Hero: React.FC = () => {
             <div className="text-center lg:text-left">
               {/* Badge */}
               <div className="inline-flex items-center justify-center mb-8 py-2 px-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-                {/* <Scale size={20} className="text-primary mr-2" /> */}
-                <span className="text-primary font-medium"> AWDZ - Administração Judicial</span>
+               
               </div>
 
               {/* Main Heading */}

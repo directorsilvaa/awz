@@ -82,22 +82,7 @@ const Contact: React.FC = () => {
                 transformar sua gestão jurídica.
               </p>
 
-              {/* Quick Contact Stats */}
-              {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                {[
-                  { value: '< 24h', label: 'Tempo de Resposta', icon: Clock },
-                  { value: '15+', label: 'Anos de Experiência', icon: CheckCircle },
-                  { value: '24/7', label: 'Suporte Disponível', icon: Phone }
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary/10">
-                    <div className="text-primary mb-3 flex justify-center">
-                      <stat.icon size={24} />
-                    </div>
-                    <div className="text-lg font-bold text-gray-900 mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </div>
-                ))}
-              </div> */}
+              {/* Removing stats section */}
             </div>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -228,16 +213,7 @@ const Contact: React.FC = () => {
                   color="bg-gradient-to-br from-blue-500 to-blue-600"
                 />
 
-                <ContactInfo
-                  icon={Phone}
-                  title="Telefone"
-                  content={
-                    <a href="tel:+556192698930" className="hover:text-primary transition-colors duration-300">
-                      (61) 99269-8930
-                    </a>
-                  }
-                  color="bg-gradient-to-br from-green-500 to-green-600"
-                />
+                {/* Removing phone section */}
 
                 <ContactInfo
                   icon={MapPin}
@@ -250,20 +226,7 @@ const Contact: React.FC = () => {
                       <p className="font-medium">70381-525 - Brasília/DF</p>
                     </div>
                   }
-                  color="bg-gradient-to-br from-purple-500 to-purple-600"
-                />
-
-                <ContactInfo
-                  icon={Clock}
-                  title="Horário de Funcionamento"
-                  content={
-                    <div className="space-y-1">
-                      <p className="font-medium">Segunda à Sexta: 09h às 18h</p>
-                      <p className="text-sm">Sábados: 09h às 12h</p>
-                      <p className="text-sm text-gray-500">Domingos: Fechado</p>
-                    </div>
-                  }
-                  color="bg-gradient-to-br from-orange-500 to-orange-600"
+                  color="bg-gradient-to-br from-yellow-500 to-yellow-600"
                 />
 
                 {/* Additional Info Card */}

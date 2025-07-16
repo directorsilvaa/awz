@@ -180,7 +180,7 @@ const ProcessConsultation: React.FC<ProcessConsultationProps> = ({ Footer }) => 
 
   return (
     <div className="pt-20">
-      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+      <div className="bg-gradient-to-b from-secondary/10 to-white">
         <section className="pt-20 pb-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
@@ -204,22 +204,7 @@ const ProcessConsultation: React.FC<ProcessConsultationProps> = ({ Footer }) => 
                 Acompanhe seus processos de forma rápida e segura através de nossa plataforma.
               </p>
 
-              {/* Quick Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {[
-                  { value: '24/7', label: 'Disponibilidade', icon: Clock },
-                  { value: '100%', label: 'Segurança', icon: Scale },
-                  // { value: 'Tempo Real', label: 'Atualizações', icon: CheckCircle }
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary/10">
-                    <div className="text-primary mb-3 flex justify-center">
-                      <stat.icon size={24} />
-                    </div>
-                    <div className="text-lg font-bold text-gray-900 mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+              {/* Removing stats section */}
             </div>
 
             <div className="max-w-3xl mx-auto">

@@ -1140,253 +1140,238 @@ const ClientArea: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        </div>
+    <div className="pt-20">
+      <div className="bg-gradient-to-b from-secondary/10 to-white">
+        <section className="pt-20 pb-20 relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+          </div>
 
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-md mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold mb-4">
-                <span className="block text-gray-800">Área do</span>
-                <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  {getUserTypeLabel(userType)}
-                </span>
-              </h1>
-              <p className="text-gray-600">
-                {isRegistering
-                  ? "Crie sua conta"
-                  : "Acesse sua conta para gerenciar seus processos"}
-              </p>
-            </div>
+          <div className="container mx-auto px-4 relative">
+            <div className="max-w-md mx-auto">
+              <div className="text-center mb-12">
+                <h1 className="text-4xl font-bold mb-4">
+                  <span className="block text-gray-800">Área do</span>
+                  <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    {getUserTypeLabel(userType)}
+                  </span>
+                </h1>
+                <p className="text-gray-600">
+                  {isRegistering
+                    ? "Crie sua conta"
+                    : "Acesse sua conta para gerenciar seus processos"}
+                </p>
+              </div>
 
-            <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-              {/* Tabs */}
-              {isRegistering && (
-                <div className="flex border-b border-gray-200">
-                  {(["credor", "advogado"] as UserType[]).map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => handleUserTypeChange(type)}
-                      className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 text-sm font-medium transition-all duration-300 ${
-                        userType === type
-                          ? "bg-primary text-white border-b-2 border-primary"
-                          : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
-                      }`}
-                    >
-                      {getUserTypeIcon(type)}
-                      <span>{getUserTypeLabel(type)}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Formulário */}
-              <div className="p-8">
-                <div className="space-y-6">
-                  {isRegistering && (
-                    <>
-                      <div>
-                        <label
-                          htmlFor="nome"
-                          className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                          Nome{" "}
-                          {userType === "advogado"
-                            ? "do Escritório/Advogado"
-                            : "Completo"}
-                        </label>
-                        <input
-                          type="text"
-                          id="nome"
-                          value={nome}
-                          onChange={(e) => setNome(e.target.value)}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                          placeholder={
-                            userType === "advogado"
-                              ? "Nome do Escritório ou Advogado"
-                              : "Seu Nome Completo"
-                          }
-                          required
-                        />
-                      </div>
-
-                      {userType === "advogado" ? (
-                        <div>
-                          <label
-                            htmlFor="cnpj"
-                            className="block text-sm font-medium text-gray-700 mb-2"
-                          >
-                            CNPJ
-                          </label>
-                          <input
-                            type="text"
-                            id="cnpj"
-                            value={cnpj}
-                            onChange={handleCNPJChange}
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                            placeholder="00.000.000/0000-00"
-                            maxLength={18}
-                            required
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <label
-                            htmlFor="cpf"
-                            className="block text-sm font-medium text-gray-700 mb-2"
-                          >
-                            CPF
-                          </label>
-                          <input
-                            type="text"
-                            id="cpf"
-                            value={cpf}
-                            onChange={handleCPFChange}
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                            placeholder="000.000.000-00"
-                            maxLength={14}
-                            required
-                          />
-                        </div>
-                      )}
-                    </>
-                  )}
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      E-mail {userType === "advogado" ? "Profissional" : ""}
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                      placeholder={
-                        userType === "advogado"
-                          ? "contato@escritorio.com"
-                          : "seu@email.com"
-                      }
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      Senha
-                    </label>
-                    <div className="relative">
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors pr-12"
-                        placeholder="••••••••"
-                        required
-                        minLength={6}
-                      />
+              <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
+                {/* Tabs */}
+                {isRegistering && (
+                  <div className="flex border-b border-gray-200">
+                    {(["credor", "advogado"] as UserType[]).map((type) => (
                       <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        key={type}
+                        onClick={() => handleUserTypeChange(type)}
+                        className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 text-sm font-medium transition-all duration-300 ${
+                          userType === type
+                            ? "bg-primary text-white border-b-2 border-primary"
+                            : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                        }`}
                       >
-                        {showPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
+                        {getUserTypeIcon(type)}
+                        <span>{getUserTypeLabel(type)}</span>
                       </button>
-                    </div>
+                    ))}
                   </div>
+                )}
 
-                  {isRegistering && (
+                {/* Formulário */}
+                <div className="p-8">
+                  <div className="space-y-6">
+                    {isRegistering && (
+                      <>
+                        <div>
+                          <label
+                            htmlFor="nome"
+                            className="block text-sm font-medium text-gray-700 mb-2"
+                          >
+                            Nome{" "}
+                            {userType === "advogado"
+                              ? "do Escritório/Advogado"
+                              : "Completo"}
+                          </label>
+                          <input
+                            type="text"
+                            id="nome"
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
+                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                            placeholder={
+                              userType === "advogado"
+                                ? "Nome do Escritório ou Advogado"
+                                : "Seu Nome Completo"
+                            }
+                            required
+                          />
+                        </div>
+
+                        {userType === "advogado" ? (
+                          <div>
+                            <label
+                              htmlFor="cnpj"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              CNPJ
+                            </label>
+                            <input
+                              type="text"
+                              id="cnpj"
+                              value={cnpj}
+                              onChange={handleCNPJChange}
+                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                              placeholder="00.000.000/0000-00"
+                              maxLength={18}
+                              required
+                            />
+                          </div>
+                        ) : (
+                          <div>
+                            <label
+                              htmlFor="cpf"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              CPF
+                            </label>
+                            <input
+                              type="text"
+                              id="cpf"
+                              value={cpf}
+                              onChange={handleCPFChange}
+                              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                              placeholder="000.000.000-00"
+                              maxLength={14}
+                              required
+                            />
+                          </div>
+                        )}
+                      </>
+                    )}
+
                     <div>
                       <label
-                        htmlFor="confirmPassword"
+                        htmlFor="email"
                         className="block text-sm font-medium text-gray-700 mb-2"
                       >
-                        Confirmar Senha
+                        E-mail {userType === "advogado" ? "Profissional" : ""}
                       </label>
                       <input
-                        type="password"
-                        id="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                        placeholder="••••••••"
+                        placeholder={
+                          userType === "advogado"
+                            ? "contato@escritorio.com"
+                            : "seu@email.com"
+                        }
                         required
-                        minLength={6}
                       />
                     </div>
-                  )}
 
-                  {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                      <p className="text-sm text-red-600">{error}</p>
-                    </div>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={handleSubmit}
-                    className="w-full bg-gradient-to-r from-primary to-primary-dark text-white py-3 px-6 rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
-                  >
-                    {isRegistering ? "Cadastrar" : "Entrar"}
-                  </button>
-
-                  <div className="text-center">
-                    <p className="text-sm text-gray-600">
-                      {isRegistering
-                        ? "Já tem uma conta?"
-                        : "Ainda não tem uma conta?"}{" "}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsRegistering(!isRegistering);
-                          setError("");
-                        }}
-                        className="font-medium text-primary hover:text-primary-dark transition-colors"
+                    <div>
+                      <label
+                        htmlFor="password"
+                        className="block text-sm font-medium text-gray-700 mb-2"
                       >
-                        {isRegistering ? "Faça login" : "Cadastre-se"}
-                      </button>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                        Senha
+                      </label>
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          id="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors pr-12"
+                          placeholder="••••••••"
+                          required
+                          minLength={6}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        >
+                          {showPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
 
-            {/* Informações específicas por tipo de usuário */}
-            <div className="mt-8 bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-primary/10">
-              <div className="text-center space-y-4">
-                <div className="pt-4 border-t border-gray-200">
-                  <p className="text-sm text-gray-600 mb-2">
-                    Precisa de ajuda? Entre em contato com nosso suporte
-                  </p>
-                  <div className="flex items-center justify-center space-x-2 text-primary hover:text-primary-dark transition-colors">
-                    <Phone size={16} />
-                    <a href="tel:+556192698930" className="font-medium text-sm">
-                      (61) 99269-8930
-                    </a>
+                    {isRegistering && (
+                      <div>
+                        <label
+                          htmlFor="confirmPassword"
+                          className="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                          Confirmar Senha
+                        </label>
+                        <input
+                          type="password"
+                          id="confirmPassword"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                          placeholder="••••••••"
+                          required
+                          minLength={6}
+                        />
+                      </div>
+                    )}
+
+                    {error && (
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <p className="text-sm text-red-600">{error}</p>
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      className="w-full bg-gradient-to-r from-primary to-primary-dark text-white py-3 px-6 rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
+                    >
+                      {isRegistering ? "Cadastrar" : "Entrar"}
+                    </button>
+
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">
+                        {isRegistering
+                          ? "Já tem uma conta?"
+                          : "Ainda não tem uma conta?"}{" "}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsRegistering(!isRegistering);
+                            setError("");
+                          }}
+                          className="font-medium text-primary hover:text-primary-dark transition-colors"
+                        >
+                          {isRegistering ? "Faça login" : "Cadastre-se"}
+                        </button>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer />
+        </section>
+        <Footer />
+      </div>
     </div>
   );
 };

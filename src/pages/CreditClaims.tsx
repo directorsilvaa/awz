@@ -18,7 +18,7 @@ const CreditClaims: React.FC = () => {
     message: '',
     documentType: ''
   });
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate()
@@ -122,7 +122,7 @@ const CreditClaims: React.FC = () => {
 
   return (
     <div className="pt-20">
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="bg-gradient-to-b from-secondary/10 to-white">
         {/* Navigation Breadcrumb */}
         <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200">
           {/* <div className="container mx-auto px-4 py-3">
@@ -143,6 +143,8 @@ const CreditClaims: React.FC = () => {
         <section className="pt-20 pb-20 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-gradient-to-b from-primary/5 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
           </div>
 
           <div className="container mx-auto px-4 relative">

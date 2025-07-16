@@ -126,17 +126,7 @@ const AdminLogin: React.FC = () => {
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Precisa de ajuda? Entre em contato com o suporte
-            </p>
-            <a
-              href="tel:+556192698930"
-              className="text-primary hover:text-primary-dark transition-colors font-medium text-sm"
-            >
-              (61) 99269-8930
-            </a>
-          </div>
+          {/* Removing help section and phone number */}
         </div>
       </div>
     </div>
