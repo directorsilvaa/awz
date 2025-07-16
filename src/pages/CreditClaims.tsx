@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Upload, FileText, Download, Send, User, Mail, Phone, Building2, AlertCircle } from 'lucide-react';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const CreditClaims: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
+    name_empresa: '',
+    userId: '',
     oab: '',
     email: '',
     phone: '',
     processNumber: '',
+    valueCredit: '',
     petitioners: '',
     message: '',
     documentType: ''
@@ -16,7 +21,13 @@ const CreditClaims: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const navigate = useNavigate()
+  useEffect(() => {
+    const authTokenSorte = localStorage.getItem('myTokenAuth');
+    if (!authTokenSorte) {
+      navigate('/cliente')
+    }
+  }, [])
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -28,35 +39,79 @@ const CreditClaims: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String = reader.result?.toString().split(',')[1]; // Extrai a parte Base64
+        const pdfBase64 = `data:application/pdf;base64,${base64String}`; // Formata a string Base64 com o prefixo
+
+        setSelectedFile(pdfBase64); // Atualiza o estado com a string Base64
+      };
+
+      reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const authTokenSorte = localStorage.getItem('myTokenAuth');
+      const userId = localStorage.getItem('clientId');
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      // Simulate form submission
+      const newFormData = {
+        ...formData,
+        userId: userId,
+        peticionantes: formData.petitioners,
+        datetime: new Date(),
+        pdfhabilitacao: selectedFile
+      }
+      setIsSubmitting(false);
+      setIsSubmitted(false);
+      const response = await axios.post(`http://localhost:8000/api/auth/habilitacoes`, newFormData, {
+        headers: {
+          'Authorization': `Bearer ${authTokenSorte}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(response?.data?.success)
+      if (response?.data?.success === true) {
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          name_empresa: '',
+          userId: '',
+          oab: '',
+          email: '',
+          phone: '',
+          processNumber: '',
+          valueCredit: '',
+          petitioners: '',
+          message: '',
+          documentType: ''
+        });
+        setSelectedFile(null);
+      }
+    } catch (error) {
+      console.error(error)
+    }
 
     // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        oab: '',
-        email: '',
-        phone: '',
-        processNumber: '',
-        petitioners: '',
-        message: '',
-        documentType: ''
-      });
-      setSelectedFile(null);
-    }, 3000);
+    // setTimeout(() => {
+    //   setIsSubmitted(false);
+    //   setFormData({
+    //     name: '',
+    //     oab: '',
+    //     email: '',
+    //     phone: '',
+    //     processNumber: '',
+    //     petitioners: '',
+    //     message: '',
+    //     documentType: ''
+    //   });
+    //   setSelectedFile(null);
+    // }, 3000);
   };
 
   const downloadModel = (type: 'habilitacao' | 'impugnacao') => {
@@ -108,7 +163,7 @@ const CreditClaims: React.FC = () => {
                 </p>
 
                 {/* Download Models */}
-                <div className="mb-8">
+                {/* <div className="mb-8">
                   <h3 className="text-lg font-medium text-gray-800 mb-4">Modelos para download</h3>
                   <div className="flex flex-wrap gap-4">
                     <button
@@ -126,7 +181,7 @@ const CreditClaims: React.FC = () => {
                       Impugnação
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 {isSubmitted ? (
                   <div className="text-center py-12">
@@ -158,6 +213,28 @@ const CreditClaims: React.FC = () => {
                           type="text"
                           name="oab"
                           value={formData.oab}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Nome da Empresa</label>
+                        <input
+                          type="text"
+                          name="name_empresa"
+                          value={formData.name_empresa}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Valor do Crédito</label>
+                        <input
+                          type="text"
+                          name="valueCredit"
+                          value={formData.valueCredit}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
                           required

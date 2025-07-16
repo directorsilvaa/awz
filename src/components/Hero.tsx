@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
               {/* Badge */}
               <div className="inline-flex items-center justify-center mb-8 py-2 px-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
                 {/* <Scale size={20} className="text-primary mr-2" /> */}
-                <span className="text-primary font-medium"> AWZD - Administração Judicial</span>
+                <span className="text-primary font-medium"> AWDZ - Administração Judicial</span>
               </div>
 
               {/* Main Heading */}
@@ -92,10 +92,6 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-secondary to-primary rounded-full opacity-20 animate-pulse delay-1000"></div>
             </div>
           </div>
         </div>
@@ -103,7 +99,7 @@ const Hero: React.FC = () => {
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-    </section>
+    </section >
   );
 };
 

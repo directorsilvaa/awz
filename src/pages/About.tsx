@@ -64,18 +64,18 @@ const About: React.FC = () => {
               </div>
 
               {/* Call to Action */}
-              <div className="mt-12 text-center">
+              {/* <div className="mt-12 text-center">
                 <div onClick={navigateOnContact} className="cursor-pointer inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                   <span>Conheça Nossos Serviços</span>
                   <ArrowRight size={20} className="ml-2" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
 
         {/* Mission & Vision Section */}
-        <section className="py-20 bg-white relative">
+        {/* <section className="py-20 bg-white relative">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -105,7 +105,7 @@ const About: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Stats Section */}
         <section className="py-20 bg-gradient-to-b from-white to-secondary/5">

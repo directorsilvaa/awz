@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Instagram, Linkedin, Youtube, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Instagram, Linkedin, Youtube, Menu, X, Home } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,6 +19,34 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const navigate = useNavigate();
+  // Recupera o token e o nome do usuário do localStorage
+  const authTokenSorte = localStorage.getItem('myTokenAuth');
+  const nomeCliente = localStorage.getItem('clientName');
+  const cargo = localStorage.getItem('role');
+
+  const goToHome = () => {
+    let to = "/";
+    if (cargo === "admin") to = "/admin/";
+    else if (cargo === "cliente") to = "/cliente";
+
+    navigate(to, { replace: true });
+    setDropdownOpen(false);
+  };
+
+  const userName = nomeCliente // ajuste a chave conforme seu projeto
+  // Dropdown
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleAvatarClick = () => setDropdownOpen((v) => !v);
+  // Função para peg  ar as iniciais
+  const getInitials = (name: string) => {
+    if (!name) return '';
+    const parts = name.trim().split(' ');
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
@@ -35,12 +63,8 @@ const Navbar = () => {
                 alt="AWDZ - Administração Judicial"
                 className="h-full w-36 object-contain transition-transform duration-300 group-hover:scale-110"
               />
-              {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div> */}
             </div>
             <div className="ml-0 hidden sm:block">
-              {/* <div className="text-xl font-bold text-primary group-hover:text-primary-dark transition-colors duration-300">
-                AWDZ
-              </div> */}
               <div className="text-sm text-gray-500">
                 Administração Judicial
               </div>
@@ -54,7 +78,7 @@ const Navbar = () => {
               { to: '/sobre', label: 'Sobre' },
               { to: '/consulta-processos', label: 'Consulta Processos' },
               { to: '/habilitacoes-credito', label: 'Habilitações' },
-              { to: '/cadastramento-assembleia', label: 'Assembleia' },
+              // { to: '/cadastramento-assembleia', label: 'Assembleia' },
               { to: '/contato', label: 'Contato' }
             ].map((item) => (
               <Link
@@ -67,7 +91,27 @@ const Navbar = () => {
               </Link>
             ))}
           </nav>
-
+          {authTokenSorte && (
+            <div className="relative">
+              <button
+                onClick={handleAvatarClick}
+                className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg focus:outline-none"
+              >
+                {getInitials(userName)}
+              </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-lg py-2 z-50">
+                  <button
+                    onClick={goToHome}
+                    className="flex items-center w-full px-4 py-2 hover:bg-gray-100"
+                  >
+                    <Home className="w-4 h-4 mr-2" />
+                    Ir para Home
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
           {/* Right Side - Social Media */}
           <div className="flex items-center space-x-4">
             {/* Social Media Icons */}
@@ -139,7 +183,7 @@ const Navbar = () => {
               { to: '/sobre', label: 'Sobre' },
               { to: '/consulta-processos', label: 'Consulta Processos' },
               { to: '/habilitacoes-credito', label: 'Habilitações' },
-              { to: '/cadastramento-assembleia', label: 'Assembleia' },
+              // { to: '/cadastramento-assembleia', label: 'Assembleia' },
               { to: '/contato', label: 'Contato' }
             ].map((item) => (
               <Link

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff, Mail } from 'lucide-react';
+import axios from 'axios';
 
 const AdminLogin: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,15 +10,36 @@ const AdminLogin: React.FC = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // This is a simple example. In production, use proper authentication
-    if (email === 'admin@awdz.com' && password === 'admin123') {
-      localStorage.setItem('adminAuthenticated', 'true');
-      navigate('/admin');
-    } else {
-      setError('Email ou senha incorretos');
+    const dados = {
+      email: email,
+      senha: password
     }
+    try {
+      const response = await axios.post('http://localhost:8000/api/auth/login', dados);
+      if (response?.data?.data?.token && response?.data?.data?.user?.cargo === 'admin') {
+        const userId = response?.data?.data?.user?._id; // Generate a random ID for demo
+        localStorage.setItem('adminAuthenticated', 'true');
+        localStorage.setItem('myTokenAuth', response?.data?.data?.token);
+        localStorage.setItem('clientEmail', response?.data?.data?.user?.email);
+        localStorage.setItem('role', response?.data?.data?.user?.cargo);
+        localStorage.setItem('clientName', response?.data?.data?.user?.nome); // Use email username
+        localStorage.setItem('clientId', userId);
+        navigate('/admin');
+      } else {
+        setError('Email ou senha incorretos');
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message || 'Email ou senha incorretos');
+    }
+    // This is a simple example. In production, use proper authentication
+    // if (email === 'admin@awdz.com' && password === 'admin123') {
+    //   localStorage.setItem('adminAuthenticated', 'true');
+    //   navigate('/admin');
+    // } else {
+    //   setError('Email ou senha incorretos');
+    // }
   };
 
   return (

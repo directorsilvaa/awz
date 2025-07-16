@@ -39,7 +39,7 @@ interface QualificationRequest {
   reviewComments?: string;
 }
 
-const ClientQualifications: React.FC = () => {
+const ClientesAdv: React.FC = () => {
   const [showNewModal, setShowNewModal] = useState(false);
   const [selectedRequest, setSelectedRequest] =
     useState<QualificationRequest | null>(null);
@@ -49,29 +49,21 @@ const ClientQualifications: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    id_cliente: "",
-    name_empresa: "",
-    userId: "",
-    oab: "",
+    nome: "",
     email: "",
-    phone: "",
-    processNumber: "",
-    valueCredit: "",
-    petitioners: "",
-    message: "",
-    documentType: "",
+    senha: "",
+    confirmarSenha: "",
+    cpf: "",
   });
   // Form states
   const [processNumber, setProcessNumber] = useState("");
   const [creditAmount, setCreditAmount] = useState("");
   const [notes, setNotes] = useState("");
   const [documents, setDocuments] = useState<Document[]>([]);
-  const cargo = localStorage.getItem("role");
 
   useEffect(() => {
     const loadAssemblies = async () => {
-      const savedAssemblies = localStorage?.getItem("habilitacoes");
+      const savedAssemblies = localStorage?.getItem("usuarios");
       const clientId = localStorage?.getItem("clientId");
 
       // If localStorage has data, use it
@@ -88,7 +80,7 @@ const ClientQualifications: React.FC = () => {
         }
 
         const response = await axios.get(
-          `http://localhost:8000/api/auth/habilitacoes/usuario/${clientId}`,
+          `http://localhost:8000/api/auth/users-advg/${clientId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -101,7 +93,7 @@ const ClientQualifications: React.FC = () => {
           setAssemblies(response?.data?.data);
           // Save to localStorage for future use
           localStorage.setItem(
-            "habilitacoes",
+            "usuarios",
             JSON.stringify(response?.data?.data)
           );
         } else {
@@ -130,15 +122,15 @@ const ClientQualifications: React.FC = () => {
       // Simulate form submission
       const newFormData = {
         ...formData,
-        userId: cargo === "advogado" ? formData?.id_cliente : userId,
-        peticionantes: formData.petitioners,
-        datetime: new Date(),
-        pdfhabilitacao: selectedFile,
+        cpf_cnpj: formData?.cpf,
+        userType: "credor",
+        userIdAdv: userId,
       };
+
       setIsSubmitting(false);
       setIsSubmitted(false);
       const response = await axios.post(
-        `http://localhost:8000/api/auth/habilitacoes`,
+        `http://localhost:8000/api/auth/register`,
         newFormData,
         {
           headers: {
@@ -151,20 +143,7 @@ const ClientQualifications: React.FC = () => {
       if (response?.data?.success === true) {
         await loadUsers();
         setIsSubmitted(true);
-        setFormData({
-          name: "",
-          id_cliente: "",
-          name_empresa: "",
-          userId: "",
-          oab: "",
-          email: "",
-          phone: "",
-          processNumber: "",
-          valueCredit: "",
-          petitioners: "",
-          message: "",
-          documentType: "",
-        });
+        setFormData({});
         setSelectedFile(null);
       }
     } catch (error) {
@@ -187,7 +166,6 @@ const ClientQualifications: React.FC = () => {
     //   setSelectedFile(null);
     // }, 3000);
   };
-
   const loadUsers = async () => {
     try {
       const token = localStorage.getItem("myTokenAuth");
@@ -199,7 +177,7 @@ const ClientQualifications: React.FC = () => {
       }
 
       const response = await axios.get(
-        `http://localhost:8000/api/auth/habilitacoes/usuario/${clientId}`,
+        `http://localhost:8000/api/auth/users-advg/${clientId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -210,10 +188,7 @@ const ClientQualifications: React.FC = () => {
 
       setAssemblies(response?.data?.data);
       // Save to localStorage for future use
-      localStorage.setItem(
-        "habilitacoes",
-        JSON.stringify(response?.data?.data)
-      );
+      localStorage.setItem("usuarios", JSON.stringify(response?.data?.data));
     } catch (error) {
       console.error("Error fetching processes:", error);
     }
@@ -246,6 +221,48 @@ const ClientQualifications: React.FC = () => {
       reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados
     }
   };
+  // const handleRemoveDocument = (docId: string) => {
+  //   setDocuments(documents.filter(doc => doc.id !== docId));
+  // };
+
+  // const handleFileUpload = (docId: string, file: File) => {
+  //   setDocuments(documents.map(doc =>
+  //     doc.id === docId
+  //       ? { ...doc, name: file.name, file }
+  //       : doc
+  //   ));
+  // };
+
+  // const handleDocumentTypeChange = (docId: string, type: string) => {
+  //   setDocuments(documents.map(doc =>
+  //     doc.id === docId
+  //       ? { ...doc, type }
+  //       : doc
+  //   ));
+  // };
+
+  // const handleSubmitRequest = () => {
+  //   if (processNumber && creditAmount && documents.length > 0) {
+  //     const newRequest: QualificationRequest = {
+  //       id: `REQ${Date.now()}`,
+  //       processNumber,
+  //       creditAmount: parseFloat(creditAmount),
+  //       submissionDate: new Date().toLocaleDateString('pt-BR'),
+  //       status: 'submitted',
+  //       documents,
+  //       notes
+  //     };
+
+  //     console.log('Submitting qualification request:', newRequest);
+
+  //     // Reset form
+  //     setProcessNumber('');
+  //     setCreditAmount('');
+  //     setNotes('');
+  //     setDocuments([]);
+  //     setShowNewModal(false);
+  //   }
+  // };
 
   const handleViewDetails = (request: QualificationRequest) => {
     setSelectedRequest(request);
@@ -258,7 +275,7 @@ const ClientQualifications: React.FC = () => {
     if (!userId) return;
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/auth/habilitacoes/${id}`,
+        `http://localhost:8000/api/auth/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -307,6 +324,7 @@ const ClientQualifications: React.FC = () => {
         return status;
     }
   };
+
   const downloadPdf = (base64String) => {
     const link = document.createElement("a");
     link.href = base64String; // Define o href como a string Base64
@@ -317,9 +335,9 @@ const ClientQualifications: React.FC = () => {
   };
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "aprovado":
+      case "habilitado":
         return <CheckCircle size={20} className="text-green-600" />;
-      case "rejeitado":
+      case "inabilitado":
         return <XCircle size={20} className="text-red-600" />;
       case "em_andamento":
         return <Clock size={20} className="text-yellow-600" />;
@@ -348,11 +366,9 @@ const ClientQualifications: React.FC = () => {
                 {" "}
                 {/* Adicionado margem à esquerda */}
                 <h1 className="text-3xl font-bold text-white">
-                  Habilitações de Crédito
+                  Gerenciamento de Clientes
                 </h1>
-                <p className="text-white/80">
-                  Gerencie suas solicitações de habilitação
-                </p>
+                <p className="text-white/80">Gerencie seus clientes</p>
               </div>
             </div>
             <button
@@ -360,30 +376,16 @@ const ClientQualifications: React.FC = () => {
               className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors flex items-center"
             >
               <Plus size={20} className="mr-2" />
-              Nova Habilitação
+              Novo Cliente
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                label: "Total de Solicitações",
+                label: "Total de Clientes",
                 value: assemblies?.length,
                 icon: FileText,
-                color: "bg-white/20",
-              },
-              {
-                label: "Em Análise",
-                value: assemblies?.filter((r) => r.status === "em_analise")
-                  .length,
-                icon: Clock,
-                color: "bg-white/20",
-              },
-              {
-                label: "Aprovadas",
-                value: assemblies?.filter((r) => r.status === "aprovado")
-                  .length,
-                icon: CheckCircle,
                 color: "bg-white/20",
               },
             ].map((stat, index) => (
@@ -413,7 +415,7 @@ const ClientQualifications: React.FC = () => {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="p-6 border-b border-gray-100">
             <h2 className="text-xl font-semibold text-gray-800">
-              Suas Solicitações
+              Seus Clientes
             </h2>
           </div>
           <div className="overflow-x-auto">
@@ -421,39 +423,36 @@ const ClientQualifications: React.FC = () => {
               <thead>
                 <tr className="bg-gray-50">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
-                    Processo
+                    ID cliente
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
-                    Credor
+                    Nome do Cliente
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
-                    Valor do Crédito
+                    CPF
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
-                    Data
+                    Email
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
                     Status
-                  </th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">
-                    Ações
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {assemblies?.map((request) => (
-                  <tr key={request.id} className="hover:bg-gray-50">
+                  <tr key={request._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {request.processNumber}
+                      {request?._id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {request?.userId?.nome}
+                      {request.nome}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      R$ {request?.valueCredit.toLocaleString("pt-BR")}
+                      {request?.cpf_cnpj}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {request.createdAt}
+                      {request.email}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
@@ -465,25 +464,6 @@ const ClientQualifications: React.FC = () => {
                         >
                           {getStatusLabel(request.status)}
                         </span>
-                      </div>
-                    </td>
-
-                    <td className="px-6 py-4">
-                      <div className="flex justify-end space-x-4">
-                        <button
-                          onClick={() => handleViewDetails(request)}
-                          className="text-blue-600 hover:text-blue-800"
-                          title="Ver detalhes"
-                        >
-                          <Eye size={20} />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(request?._id)}
-                          className="text-red-600 hover:text-red-800"
-                          title="Ver detalhes"
-                        >
-                          <Trash2 size={20} />
-                        </button>
                       </div>
                     </td>
                   </tr>
@@ -499,91 +479,17 @@ const ClientQualifications: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-[800px] max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold text-gray-800 mb-6">
-              Nova Habilitação de Crédito
+              Novo Cliente
             </h3>
-
-            {/* <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Número do Processo
-                  </label>
-                  <input
-                    type="text"
-                    value={processNumber}
-                    onChange={(e) => setProcessNumber(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    placeholder="0000000-00.0000.0.00.0000"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Valor do Crédito (R$)
-                  </label>
-                  <input
-                    type="number"
-                    value={creditAmount}
-                    onChange={(e) => setCreditAmount(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    placeholder="0,00"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Observações
-                </label>
-                <textarea
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                  rows={3}
-                  placeholder="Descreva o motivo da habilitação..."
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-end space-x-3 mt-6">
-              <button
-                onClick={() => setShowNewModal(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleSubmitRequest}
-                disabled={!processNumber || !creditAmount || documents.length === 0}
-                className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-lg disabled:opacity-50 flex items-center"
-              >
-                <Send size={16} className="mr-2" />
-                Enviar Solicitação
-              </button>
-            </div> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {cargo === "advogado" && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    ID Cliente
-                  </label>
-                  <input
-                    type="text"
-                    name="id_cliente"
-                    value={formData.id_cliente}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    required
-                  />
-                </div>
-              )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Nome
+                  Nome do Cliente
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="nome"
+                  value={formData.nome}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   required
@@ -591,38 +497,12 @@ const ClientQualifications: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  OAB
+                  CPF
                 </label>
                 <input
                   type="text"
-                  name="oab"
-                  value={formData.oab}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Nome da Empresa
-                </label>
-                <input
-                  type="text"
-                  name="name_empresa"
-                  value={formData.name_empresa}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Valor do Crédito
-                </label>
-                <input
-                  type="text"
-                  name="valueCredit"
-                  value={formData.valueCredit}
+                  name="cpf"
+                  value={formData.cpf}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   required
@@ -646,12 +526,25 @@ const ClientQualifications: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Telefone
+                  Senha
                 </label>
                 <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  type="password"
+                  name="senha"
+                  value={formData.senha}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Confirmar Senha
+                </label>
+                <input
+                  type="password"
+                  name="confirmarSenha"
+                  value={formData.confirmarSenha}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   required
@@ -659,107 +552,6 @@ const ClientQualifications: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Selecione o processo relacionado
-              </label>
-              <input
-                type="text"
-                name="processNumber"
-                value={formData.processNumber}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                placeholder="Número do processo"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Peticionante(s)/Credor(es)
-              </label>
-              <textarea
-                name="petitioners"
-                value={formData.petitioners}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Mensagem
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Selecione o tipo de documento
-              </label>
-              <select
-                name="documentType"
-                value={formData.documentType}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                required
-              >
-                <option value="">Selecione...</option>
-                <option value="habilitacao">Habilitação de Crédito</option>
-                <option value="impugnacao">Impugnação</option>
-                <option value="divergencia">Divergência de Crédito</option>
-                <option value="outros">Outros</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Escolher arquivo
-              </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="hidden"
-                  id="file-upload"
-                  accept=".pdf,.doc,.docx"
-                />
-                <label htmlFor="file-upload" className="cursor-pointer">
-                  <Upload size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-600">
-                    {selectedFile
-                      ? selectedFile.name
-                      : "Nenhum arquivo escolhido"}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-2">
-                    Clique para selecionar um arquivo
-                  </p>
-                </label>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="flex items-start">
-                <AlertCircle
-                  size={20}
-                  className="text-blue-600 mt-0.5 mr-3 flex-shrink-0"
-                />
-                <p className="text-sm text-blue-800">
-                  Os arquivos não podem ter mais que 3MB cada. Caso necessário,
-                  divida em vários arquivos ou utilize o formulário mais de uma
-                  vez.
-                </p>
-              </div>
-            </div>
             <div className="flex justify-end space-x-3 mt-6">
               <button
                 onClick={() => setShowNewModal(false)}
@@ -772,7 +564,7 @@ const ClientQualifications: React.FC = () => {
                 className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-lg disabled:opacity-50 flex items-center"
               >
                 <Send size={16} className="mr-2" />
-                Enviar Solicitação
+                Criar Cliente
               </button>
             </div>
           </div>
@@ -797,14 +589,6 @@ const ClientQualifications: React.FC = () => {
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Credor
-                  </label>
-                  <p className="text-gray-900">
-                    {selectedRequest?.userId?.nome || "S/N"}
-                  </p>
-                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Processo
@@ -975,4 +759,4 @@ const ClientQualifications: React.FC = () => {
   );
 };
 
-export default ClientQualifications;
+export default ClientesAdv;

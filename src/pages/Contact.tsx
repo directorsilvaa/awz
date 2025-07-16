@@ -267,7 +267,7 @@ const Contact: React.FC = () => {
                 />
 
                 {/* Additional Info Card */}
-                <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-8 rounded-2xl border border-primary/10">
+                {/* <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-8 rounded-2xl border border-primary/10">
                   <h3 className="font-semibold text-gray-800 text-lg mb-4">Precisa de Atendimento Urgente?</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     Para casos urgentes, entre em contato diretamente pelo telefone.
@@ -280,7 +280,7 @@ const Contact: React.FC = () => {
                     <Phone size={16} className="mr-2" />
                     Ligar Agora
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

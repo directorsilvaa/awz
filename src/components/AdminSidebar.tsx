@@ -8,7 +8,10 @@ import {
   Clock,
   LogOut,
   Search,
-  Award
+  Award,
+  User,
+  List,
+  BellPlusIcon
 } from 'lucide-react';
 
 const AdminSidebar: React.FC = () => {
@@ -19,13 +22,16 @@ const AdminSidebar: React.FC = () => {
     { path: '/admin', icon: Clock, label: 'Assembleias' },
     { path: '/admin/processes', icon: FileText, label: 'Processos' },
     // { path: '/admin/relatorios', icon: PieChart, label: 'Relatórios' },
-    { path: '/admin/consulta', icon: Search, label: 'Consulta Processos' },
+    // { path: '/admin/consulta', icon: Search, label: 'Consulta Processos' },
     { path: '/admin/habilitacoes', icon: Award, label: 'Habilitações' },
-    { path: '/admin/operacoes', icon: Settings, label: 'Operações' },
+    { path: '/admin/empresas', icon: BellPlusIcon, label: 'Empresas' },
+    // { path: '/admin/operacoes', icon: Settings, label: 'Operações' },
+    { path: '/admin/clientes', icon: List, label: 'Gerenciar Usuários' },
   ];
 
   const handleLogout = () => {
     localStorage.removeItem('adminAuthenticated');
+    localStorage.clear();
     window.location.href = '/admin/login';
   };
 
