@@ -67,11 +67,6 @@ const Contact: React.FC = () => {
 
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center justify-center mb-8 py-3 px-6 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-primary/10">
-                <MessageSquare size={20} className="text-primary mr-2" />
-                <span className="text-primary font-medium">Fale Conosco</span>
-              </div>
-
               <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="block text-gray-800">Entre em</span>
                 <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Contato</span>
@@ -210,7 +205,7 @@ const Contact: React.FC = () => {
                       contato@awdz.com.br
                     </a>
                   }
-                  color="bg-gradient-to-br from-blue-500 to-blue-600"
+                  color="bg-primary"
                 />
 
                 {/* Removing phone section */}
@@ -226,7 +221,7 @@ const Contact: React.FC = () => {
                       <p className="font-medium">70381-525 - Brasília/DF</p>
                     </div>
                   }
-                  color="bg-gradient-to-br from-yellow-500 to-yellow-600"
+                  color="bg-primary"
                 />
 
                 {/* Additional Info Card */}

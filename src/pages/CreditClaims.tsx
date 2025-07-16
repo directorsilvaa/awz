@@ -150,7 +150,7 @@ const CreditClaims: React.FC = () => {
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center mb-4">
               <h1 className="text-4xl md:text-5xl font-bold mb-0 leading-tight text-black">
-                Habilitações e divergências de crédito
+                Habilitações e Divergências de Crédito
               </h1>
             </div>
 

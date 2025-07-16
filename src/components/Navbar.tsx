@@ -77,7 +77,7 @@ const Navbar = () => {
               { to: '/', label: 'Início' },
               { to: '/sobre', label: 'Sobre' },
               { to: '/consulta-processos', label: 'Consulta Processos' },
-              { to: '/habilitacoes-credito', label: 'Habilitações' },
+              { to: '/habilitacoes-credito', label: 'Habilitações e Divergências' },
               // { to: '/cadastramento-assembleia', label: 'Assembleia' },
               { to: '/contato', label: 'Contato' }
             ].map((item) => (

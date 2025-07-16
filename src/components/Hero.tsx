@@ -18,9 +18,9 @@ const Hero: React.FC = () => {
             {/* Content */}
             <div className="text-center lg:text-left">
               {/* Badge */}
-              <div className="inline-flex items-center justify-center mb-8 py-2 px-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+              {/* <div className="inline-flex items-center justify-center mb-8 py-2 px-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
                
-              </div>
+              </div> */}
 
               {/* Main Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">

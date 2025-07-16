@@ -190,10 +190,6 @@ const ProcessConsultation: React.FC<ProcessConsultationProps> = ({ Footer }) => 
 
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center mb-16">
-              <div className="inline-flex items-center justify-center mb-8 py-3 px-6 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-primary/10">
-                <Search size={20} className="text-primary mr-2" />
-                <span className="text-primary font-medium">Consulta Pública</span>
-              </div>
 
               <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="block text-gray-800">Consulta de</span>
@@ -369,7 +365,7 @@ const ProcessConsultation: React.FC<ProcessConsultationProps> = ({ Footer }) => 
                   },
                   {
                     icon: Clock,
-                    title: 'Atualizações em Tempo Real',
+                    title: 'Atualizações Frequentes',
                     description: 'Informações atualizadas regularmente para manter você sempre informado.',
                     color: 'from-blue-50 to-blue-100'
                   },

@@ -290,7 +290,36 @@ const ClientQualifications: React.FC = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
-
+  const getTipoDocumentoColor = (tipo: string) => {
+    switch (tipo) {
+      case "habilitacao":
+        return "bg-blue-100 text-blue-800";
+      case "impugnacao":
+        return "bg-red-100 text-red-800";
+      case "divergencia":
+        return "bg-orange-100 text-orange-800";
+      case "Outros":
+        return "bg-gray-100 text-gray-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+  const getStatusLabelTypeDocument = (status: string) => {
+    switch (status) {
+      case "impugnacao":
+        return "Impugnação";
+      case "habilitacao":
+        return "Habilitação de Crédito";
+      case "divergencia":
+        return "Divergência de Crédito";
+      case "aprovado":
+        return "Aprovado";
+      case "rejeitado":
+        return "Rejeitado";
+      default:
+        return status;
+    }
+  };
   const getStatusLabel = (status: string) => {
     switch (status) {
       case "draft":
@@ -347,11 +376,10 @@ const ClientQualifications: React.FC = () => {
               <div className="mt-4 ml-6">
                 {" "}
                 {/* Adicionado margem à esquerda */}
-                <h1 className="text-3xl font-bold text-white">
-                  Habilitações de Crédito
-                </h1>
+                <h1 className="text-3xl font-bold text-white">Solicitações</h1>
                 <p className="text-white/80">
-                  Gerencie suas solicitações de habilitação
+                  Gerencie suas solicitações de habilitação, divergência ou
+                  impugnação.
                 </p>
               </div>
             </div>
@@ -360,7 +388,7 @@ const ClientQualifications: React.FC = () => {
               className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors flex items-center"
             >
               <Plus size={20} className="mr-2" />
-              Nova Habilitação
+              Nova Solicitação
             </button>
           </div>
 
@@ -424,6 +452,9 @@ const ClientQualifications: React.FC = () => {
                     Processo
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                    Tipo
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
                     Credor
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
@@ -445,6 +476,13 @@ const ClientQualifications: React.FC = () => {
                   <tr key={request.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-sm text-gray-900">
                       {request.processNumber}
+                    </td>
+                    <td
+                      className={`px-0.2 py-0.5 text-sm text-center items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getTipoDocumentoColor(
+                        request.documentType
+                      )}`}
+                    >
+                      {getStatusLabelTypeDocument(request?.documentType)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
                       {request?.userId?.nome}
@@ -499,7 +537,7 @@ const ClientQualifications: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-[800px] max-h-[80vh] overflow-y-auto">
             <h3 className="text-xl font-semibold text-gray-800 mb-6">
-              Nova Habilitação de Crédito
+              Nova Solicitação
             </h3>
 
             {/* <div className="space-y-6">

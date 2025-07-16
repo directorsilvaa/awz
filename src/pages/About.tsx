@@ -22,11 +22,6 @@ const About: React.FC = () => {
 
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center mb-8 py-3 px-6 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-primary/10">
-                <Sparkles size={20} className="text-secondary mr-2" />
-                <span className="text-primary font-medium">Nossa História</span>
-              </div>
-
               <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="block text-gray-800">Quem</span>
                 <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Somos</span>
@@ -114,13 +109,13 @@ const About: React.FC = () => {
               <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Nossa Expertise
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Números que demonstram nossa capacidade e comprometimento com a excelência
-              </p>
+              </p> */}
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-0">
               {[
                 { value: 'Nacional', label: 'Atuação em Todo País', icon: Building2 },
                 { value: 'Multidisciplinar', label: 'Equipe Especializada', icon: Users },
@@ -190,17 +185,17 @@ const About: React.FC = () => {
                   <div className="bg-white/10 p-12 rounded-3xl backdrop-blur-lg transform hover:scale-105 transition-all duration-500 border border-white/20 shadow-2xl">
                     <div className="relative">
                       <Laptop size={120} className="text-white mx-auto" />
-                      <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full opacity-60 animate-pulse"></div>
-                      <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-white rounded-full opacity-40 animate-pulse delay-1000"></div>
+                      {/* <div className="absolute -top-4 -right-4 w-8 h-8 bg-secondary rounded-full opacity-60 animate-pulse"></div>
+                      <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-white rounded-full opacity-40 animate-pulse delay-1000"></div> */}
                     </div>
                   </div>
                 </div>
 
                 <div className="order-1 lg:order-2">
-                  <div className="inline-flex items-center justify-center mb-6 py-2 px-4 bg-white/10 backdrop-blur-sm rounded-full">
+                  {/* <div className="inline-flex items-center justify-center mb-6 py-2 px-4 bg-white/10 backdrop-blur-sm rounded-full">
                     <Laptop size={16} className="text-white mr-2" />
                     <span className="text-white/90 font-medium text-sm">Inovação Tecnológica</span>
-                  </div>
+                  </div> */}
 
                   <h2 className="text-4xl font-bold mb-8 text-white">
                     Inovação Tecnológica

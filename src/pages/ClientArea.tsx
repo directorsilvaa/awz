@@ -830,7 +830,7 @@ const ClientDashboard: React.FC = () => {
                   ]
                 : []),
               {
-                label: "Habilitações",
+                label: "Solicitações",
                 value: habilit?.length || 0,
                 icon: Award,
                 color: "bg-white/20",
@@ -922,17 +922,16 @@ const ClientDashboard: React.FC = () => {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
               <Award className="mr-2 text-blue-600" size={20} />
-              Habilitações de Crédito
+              Solicitações
             </h3>
             <p className="text-gray-600 mb-4">
-              Gerencie suas solicitações de habilitação de crédito nos
-              processos.
+              Gerencie suas solicitações...
             </p>
             <Link
               to="/cliente/habilitacoes"
               className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg transition-colors"
             >
-              Acessar Habilitações
+              Acessar Solicitações
             </Link>
           </div>
 
@@ -1100,7 +1099,7 @@ const ClientArea: React.FC = () => {
           senha: password,
           confirmarSenha: confirmPassword,
           userType,
-          cpf_cnpj: userType === 'advogado' ? cnpj : cpf,
+          cpf_cnpj: userType === "advogado" ? cnpj : cpf,
         }
       : { email, senha: password };
 
@@ -1155,7 +1154,7 @@ const ClientArea: React.FC = () => {
                 <h1 className="text-4xl font-bold mb-4">
                   <span className="block text-gray-800">Área do</span>
                   <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    {getUserTypeLabel(userType)}
+                    Credor/Advogado
                   </span>
                 </h1>
                 <p className="text-gray-600">
