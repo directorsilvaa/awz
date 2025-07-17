@@ -59,7 +59,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center group">
             <div className="">
               <img
-                src="/logo.png"
+                src="/logo_sem_escrita.png"
                 alt="AWDZ - Administração Judicial"
                 className="h-full w-36 object-contain transition-transform duration-300 group-hover:scale-110"
               />
