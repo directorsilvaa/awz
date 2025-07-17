@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Scale, Users, Award } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Scale, Users, Award } from "lucide-react";
 
 const Hero: React.FC = () => {
   return (
@@ -12,15 +12,22 @@ const Hero: React.FC = () => {
         <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative">
+      <div className="container mx-auto px-4 relative">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Centered Logo */}
+          <div className="flex justify-center mb-8">
+            <img
+              src="/logo_awdz.png"
+              alt="AWDZ - Administração Judicial"
+              className="w-auto h-32 object-contain transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Content */}
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col justify-center min-h-[400px]">
               {/* Badge */}
-              {/* <div className="inline-flex items-center justify-center mb-8 py-2 px-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-               
-              </div> */}
+              <div className="inline-flex items-center justify-center mb-8 py-2 px-6 "></div>
 
               {/* Main Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
@@ -32,8 +39,9 @@ const Hero: React.FC = () => {
 
               {/* Subheading */}
               <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Atuamos com responsabilidade e transparência na gestão de processos de recuperação judicial,
-                garantindo a melhor condução para a reestruturação da sua empresa.
+                Atuamos com responsabilidade e transparência na gestão de
+                processos de recuperação judicial, garantindo a melhor condução
+                para a reestruturação da sua empresa.
               </p>
 
               {/* CTA Buttons */}
@@ -43,7 +51,10 @@ const Hero: React.FC = () => {
                   className="group inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-dark text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   <span>Fale Conosco</span>
-                  <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight
+                    size={20}
+                    className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                  />
                 </Link>
                 <Link
                   to="/sobre"
@@ -52,11 +63,10 @@ const Hero: React.FC = () => {
                   <span>Saiba Mais</span>
                 </Link>
               </div>
-
             </div>
 
             {/* Visual Element */}
-            <div className="relative">
+            <div className="relative flex mt-0 flex-col justify-center min-h-[400px]">
               <div className="relative bg-white rounded-3xl shadow-2xl p-8">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl"></div>
                 <div className="relative space-y-6">
@@ -65,8 +75,12 @@ const Hero: React.FC = () => {
                       <Scale size={24} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Administração Judicial</h3>
-                      <p className="text-sm text-gray-600">Gestão especializada</p>
+                      <h3 className="font-semibold text-gray-800">
+                        Administração Judicial
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Gestão especializada
+                      </p>
                     </div>
                   </div>
 
@@ -75,8 +89,12 @@ const Hero: React.FC = () => {
                       <Users size={24} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Equipe Multidisciplinar</h3>
-                      <p className="text-sm text-gray-600">Profissionais qualificados</p>
+                      <h3 className="font-semibold text-gray-800">
+                        Equipe Multidisciplinar
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Profissionais qualificados
+                      </p>
                     </div>
                   </div>
 
@@ -85,8 +103,12 @@ const Hero: React.FC = () => {
                       <Award size={24} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800">Excelência</h3>
-                      <p className="text-sm text-gray-600">Especialistas Reconhecidos no Segmento</p>
+                      <h3 className="font-semibold text-gray-800">
+                        Excelência
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        Especialistas Reconhecidos no Segmento
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -95,10 +117,9 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-    </section >
+    </section>
   );
 };
 

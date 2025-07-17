@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             <p className="text-gray-600 mb-4">
               Simplificando a administração judicial com tecnologia de ponta desde 2025.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-primary transition-colors">
                 <Instagram size={20} />
               </a>
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
               <a href="#" aria-label="YouTube" className="text-gray-400 hover:text-primary transition-colors">
                 <Youtube size={20} />
               </a>
-            </div>
+            </div> */}
           </div>
           
           <div className="col-span-1">

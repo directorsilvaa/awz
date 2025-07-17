@@ -114,8 +114,7 @@ const Navbar = () => {
           )}
           {/* Right Side - Social Media */}
           <div className="flex items-center space-x-4">
-            {/* Social Media Icons */}
-            <div className="hidden md:flex items-center space-x-3">
+            {/* <div className="hidden md:flex items-center space-x-3">
               {[
                 { href: '#', icon: Instagram, label: 'Instagram' },
                 { href: '#', icon: Linkedin, label: 'LinkedIn' },
@@ -130,7 +129,7 @@ const Navbar = () => {
                   <social.icon size={18} className="group-hover:scale-110 transition-transform duration-300" />
                 </a>
               ))}
-            </div>
+            </div> */}
 
             {/* Mobile Menu Button */}
             <button
